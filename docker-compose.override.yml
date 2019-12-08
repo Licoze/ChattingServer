@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  chattingserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - CUSTOMCONNSTR_DefaultConnection=Host=database;Database=ChattingServerDB;Username=admin;Password=adminpass
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    links:
+      - database
+
+  database:
+    environment:
+      - POSTGRES_USER=admin 
+      - POSTGRES_PASSWORD=adminpass
+      - POSTGRES_DB=ChattingServerDB
+    ports:
+      - "54320:5432"

@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  chattingserver:
+    image: ${DOCKER_REGISTRY-}chattingserver
+    build:
+      context: .
+      dockerfile: ChattingServer/Dockerfile
+  database:
+    image: "postgres"
