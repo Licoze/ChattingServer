@@ -14,6 +14,8 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     links:
       - database
+    depends_on:
+      - database
 
   database:
     environment:
